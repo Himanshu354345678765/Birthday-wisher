@@ -3,13 +3,29 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from datetime import datetime, date
 import os
+import dj_database_url
 from werkzeug.exceptions import BadRequest
 from whatsapp_service import WhatsAppService, create_whatsapp_service
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///birthday_app.db'
+
+# Configure database based on environment
+if os.environ.get('RENDER') or os.environ.get('FLASK_ENV') == 'production':
+    # Use PostgreSQL in production (Render)
+    database_url = os.environ.get('DATABASE_URL', '')
+    if database_url:
+        app.config['SQLALCHEMY_DATABASE_URI'] = database_url
+    else:
+        # Fallback to PostgreSQL URL format for Render
+        app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgres@localhost:5432/birthday_app'
+        print("WARNING: No DATABASE_URL found, using default PostgreSQL configuration")
+else:
+    # Use SQLite in development
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///birthday_app.db'
+    print("Using SQLite database for development")
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = 'your-secret-key-change-this'
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'your-secret-key-change-this')
 
 db = SQLAlchemy(app)
 CORS(app)
@@ -22,6 +38,20 @@ def root():
 @app.route('/api/health')
 def health():
     return jsonify({ 'ok': True })
+
+@app.route('/api/init-db', methods=['POST'])
+def initialize_database():
+    """Initialize the database (useful for Render deployments)"""
+    try:
+        from database import ensure_database_exists
+        success = ensure_database_exists()
+        
+        if success:
+            return jsonify({'success': True, 'message': 'Database initialized successfully'})
+        else:
+            return jsonify({'success': False, 'error': 'Failed to initialize database'}), 500
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 # Database Models
 class Contact(db.Model):
@@ -66,30 +96,42 @@ def get_contacts():
 def add_contact():
     try:
         data = request.get_json()
+        print(f"Received contact data: {data}")
         
         # Validate required fields
         if not all(k in data for k in ('name', 'birthdate', 'whatsapp_number')):
+            print(f"Missing required fields in data: {data}")
             return jsonify({'error': 'Missing required fields'}), 400
         
         # Parse birthdate
         try:
             birthdate = datetime.strptime(data['birthdate'], '%Y-%m-%d').date()
-        except ValueError:
+        except ValueError as ve:
+            print(f"Invalid birthdate format: {data['birthdate']}. Error: {str(ve)}")
             return jsonify({'error': 'Invalid birthdate format. Use YYYY-MM-DD'}), 400
         
-        contact = Contact(
-            name=data['name'],
-            birthdate=birthdate,
-            whatsapp_number=data['whatsapp_number']
-        )
-        
-        db.session.add(contact)
-        db.session.commit()
-        
-        return jsonify(contact.to_dict()), 201
+        # Create contact object
+        try:
+            contact = Contact(
+                name=data['name'],
+                birthdate=birthdate,
+                whatsapp_number=data['whatsapp_number']
+            )
+            
+            # Add to session and commit
+            db.session.add(contact)
+            db.session.commit()
+            print(f"Contact added successfully: {contact.id}")
+            
+            return jsonify(contact.to_dict()), 201
+        except Exception as db_error:
+            db.session.rollback()
+            print(f"Database error adding contact: {str(db_error)}")
+            return jsonify({'error': f'Database error: {str(db_error)}'}), 500
     
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        print(f"Unexpected error in add_contact: {str(e)}")
+        return jsonify({'error': f'Server error: {str(e)}'}), 500
 
 @app.route('/api/scheduler/preview', methods=['GET'])
 def preview_scheduled_messages():
@@ -516,8 +558,10 @@ def get_upcoming_birthdays():
 # Initialize database handled in __main__ block below
 
 if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
+    # Initialize database
+    from database import ensure_database_exists
+    ensure_database_exists()
+    
     # Auto-start scheduler at 21:55 IST each day
     try:
         from scheduler_service import get_scheduler
