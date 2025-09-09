@@ -14,6 +14,15 @@ app.config['SECRET_KEY'] = 'your-secret-key-change-this'
 db = SQLAlchemy(app)
 CORS(app)
 
+# Health & root endpoints for platform checks
+@app.route('/')
+def root():
+    return jsonify({ 'ok': True, 'service': 'birthday-backend' })
+
+@app.route('/api/health')
+def health():
+    return jsonify({ 'ok': True })
+
 # Database Models
 class Contact(db.Model):
     id = db.Column(db.Integer, primary_key=True)
