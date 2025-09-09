@@ -1,0 +1,164 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+:root {
+  /* Brand colors */
+  --color-primary: #6366f1; /* indigo-500 */
+  --color-primary-foreground: #ffffff;
+  --color-accent: #8b5cf6; /* violet-500 */
+  --color-secondary: #f8fafc; /* slate-50 */
+  --color-secondary-foreground: #0f172a; /* slate-900 */
+
+  /* UI colors */
+  --color-background: #eef2f7; /* soft slate */
+  --color-card: #ffffff;
+  --color-card-foreground: #0f172a;
+  --color-border: #e2e8f0; /* slate-200 */
+  --color-muted: #f8fafc; /* slate-50 */
+  --color-muted-foreground: #64748b; /* slate-500 */
+  --color-input: #ffffff;
+  --color-ring: rgba(99, 102, 241, 0.25);
+  --color-destructive: #ef4444; /* red-500 */
+  --color-destructive-foreground: #ffffff;
+
+  /* Charts/extra */
+  --color-chart-1: #22c55e; /* green-500 */
+
+  /* Radii */
+  --radius-md: 12px;
+  --radius-lg: 16px;
+
+  /* Sidebar */
+  --sidebar-bg: #0f172a; /* slate-900 */
+  --sidebar-border: #1f2937; /* gray-800 */
+  --sidebar-foreground: #94a3b8; /* slate-400 */
+  --sidebar-accent: #111827; /* gray-900 */
+  --sidebar-accent-foreground: #e5e7eb; /* gray-200 */
+  --sidebar-primary: #6366f1; /* indigo-500 */
+  --sidebar-primary-foreground: #ffffff;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(180deg, #f4f7fb 0%, #eef2f7 100%);
+  color: var(--color-card-foreground);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+/* Utility class mappings (without Tailwind) */
+.bg-background { background-color: var(--color-background); }
+.bg-card { background-color: var(--color-card); }
+.border-border { border-color: var(--color-border); }
+.text-foreground { color: var(--color-card-foreground); }
+.text-muted-foreground { color: var(--color-muted-foreground); }
+.text-primary { color: var(--color-primary); }
+.text-accent { color: var(--color-accent); }
+.text-chart-1 { color: var(--color-chart-1); }
+.bg-muted { background-color: var(--color-muted); }
+.bg-accent\/10 { background-color: rgba(139, 92, 246, 0.08); }
+.bg-primary\/10 { background-color: rgba(99, 102, 241, 0.08); }
+
+/* Sidebar helpers */
+.bg-sidebar { background-color: var(--sidebar-bg); }
+.border-sidebar-border { border-color: var(--sidebar-border); }
+.text-sidebar-foreground { color: var(--sidebar-foreground); }
+.hover\:bg-sidebar-accent:hover { background-color: var(--sidebar-accent); }
+.hover\:text-sidebar-accent-foreground:hover { color: var(--sidebar-accent-foreground); }
+.bg-sidebar-primary { background-color: var(--sidebar-primary); }
+.text-sidebar-primary-foreground { color: var(--sidebar-primary-foreground); }
+
+/* Basic layout utilities used in JSX */
+.min-h-screen { min-height: 100vh; }
+.border-b { border-bottom-width: 1px; }
+.border-r { border-right-width: 1px; }
+.rounded-md { border-radius: var(--radius-md); }
+.rounded-lg { border-radius: var(--radius-lg); }
+.p-4 { padding: 1rem; }
+.p-6 { padding: 1.5rem; }
+.px-4 { padding-left: 1rem; padding-right: 1rem; }
+.px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+.py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+.py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+.w-full { width: 100%; }
+.w-64 { width: 16rem; }
+.w-72 { width: 18rem; }
+.h-full { height: 100%; }
+.fixed { position: fixed; }
+.inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+.absolute { position: absolute; }
+.left-0 { left: 0; }
+.top-0 { top: 0; }
+.z-40 { z-index: 40; }
+.flex { display: flex; }
+.flex-1 { flex: 1 1 0%; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.gap-2 { gap: 0.5rem; }
+.gap-3 { gap: 0.75rem; }
+.space-y-2 > * + * { margin-top: 0.5rem; }
+.space-y-3 > * + * { margin-top: 0.75rem; }
+.space-y-6 > * + * { margin-top: 1.5rem; }
+.text-sm { font-size: 0.875rem; }
+.text-lg { font-size: 1.125rem; }
+.text-xl { font-size: 1.25rem; }
+.text-2xl { font-size: 1.5rem; }
+.text-3xl { font-size: 1.875rem; }
+.font-bold { font-weight: 700; }
+.font-medium { font-weight: 500; }
+.rounded-full { border-radius: 9999px; }
+.transition-colors { transition: color .15s ease, background-color .15s ease; }
+.transition-shadow { transition: box-shadow .2s ease; }
+.hover\:shadow-sm:hover { box-shadow: 0 1px 4px rgba(0,0,0,.06); }
+.hover\:shadow-md:hover { box-shadow: 0 8px 24px rgba(99,102,241,.18); }
+.md\:block { display: none; }
+.md\:hidden { display: block; }
+.md\:px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+.md\:py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+.md\:p-6 { padding: 1.5rem; }
+.md\:h-8 { height: 2rem; }
+.md\:w-8 { width: 2rem; }
+.sm\:block { display: none; }
+.sm\:flex-row { flex-direction: row; }
+.flex-col { flex-direction: column; }
+.grid { display: grid; }
+.grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+.sm\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.lg\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.gap-4 { gap: 1rem; }
+.gap-6 { gap: 1.5rem; }
+.md\:text-3xl { font-size: 1.875rem; }
+.md\:text-xl { font-size: 1.25rem; }
+.hidden { display: none; }
+
+/* Container width for main content */
+.container { max-width: 1200px; margin-left: auto; margin-right: auto; }
+
+/* Responsive breakpoints */
+@media (min-width: 640px) {
+  .sm\:block { display: block; }
+  .sm\:flex-row { flex-direction: row; }
+  .sm\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (min-width: 768px) {
+  .md\:block { display: block; }
+  .md\:hidden { display: none; }
+  .md\:px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .md\:py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+  .md\:p-6 { padding: 1.5rem; }
+  .md\:text-3xl { font-size: 1.875rem; }
+  .md\:text-xl { font-size: 1.25rem; }
+}
+
+@media (min-width: 1024px) {
+  .lg\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}

@@ -1,0 +1,76 @@
+.App {
+  text-align: center;
+}
+
+.sidebar-active {
+  background-color: var(--color-primary);
+  color: var(--color-primary-foreground);
+}
+
+.card {
+  background-color: var(--color-card);
+  color: var(--color-card-foreground);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.06), 0 1px 2px 0 rgba(0, 0, 0, 0.04);
+}
+
+.btn-primary {
+  background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-accent) 100%);
+  color: var(--color-primary-foreground);
+  border: none;
+  padding: 0.65rem 1.1rem;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.btn-secondary {
+  background-color: var(--color-secondary);
+  color: var(--color-secondary-foreground);
+  border: 1px solid var(--color-border);
+  padding: 0.65rem 1.1rem;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-muted);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+.btn-destructive {
+  background-color: var(--color-destructive);
+  color: var(--color-destructive-foreground);
+  border: none;
+  padding: 0.65rem 1.1rem;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-weight: 600;
+  transition: opacity 0.2s, box-shadow 0.2s;
+}
+
+.input-field {
+  background-color: var(--color-input);
+  border: 1px solid var(--color-border);
+  padding: 0.7rem 0.8rem;
+  border-radius: var(--radius-md);
+  width: 100%;
+  font-size: 0.95rem;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-ring);
+}

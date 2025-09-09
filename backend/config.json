@@ -1,0 +1,31 @@
+{
+  "app": {
+    "name": "Birthday Reminder App",
+    "version": "1.0.0",
+    "description": "Automated WhatsApp birthday reminder system"
+  },
+  "server": {
+    "host": "localhost",
+    "port": 5000,
+    "debug": true
+  },
+  "database": {
+    "type": "sqlite",
+    "filename": "birthday_app.db"
+  },
+  "scheduler": {
+    "default_hour": 9,
+    "default_minute": 0,
+    "timezone": "local"
+  },
+  "whatsapp": {
+    "message_templates": {
+      "birthday": "🎉 Happy Birthday {name}! 🎂\n\nWishing you a wonderful day filled with happiness and joy!\n\n– from {wisher}",
+      "test": "🧪 Test message from Birthday Reminder App!\n\nThis is a test to verify your WhatsApp integration is working correctly.\n\n– from {wisher}"
+    }
+  },
+  "logging": {
+    "level": "INFO",
+    "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  }
+}
