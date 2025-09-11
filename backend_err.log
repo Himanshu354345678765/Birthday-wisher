@@ -29,3 +29,44 @@ INFO:werkzeug:127.0.0.1 - - [09/Sep/2025 14:35:39] "GET /api/contacts HTTP/1.1" 
 INFO:werkzeug:127.0.0.1 - - [09/Sep/2025 14:35:39] "GET /api/birthdays/today HTTP/1.1" 200 -
 INFO:werkzeug:127.0.0.1 - - [09/Sep/2025 14:35:43] "GET /api/settings HTTP/1.1" 200 -
 INFO:werkzeug:127.0.0.1 - - [09/Sep/2025 14:35:43] "GET /api/settings HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Sep/2025 14:55:45] "GET /api/contacts HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Sep/2025 14:55:45] "GET /api/birthdays/today HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Sep/2025 14:55:45] "GET /api/contacts HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/Sep/2025 14:55:45] "GET /api/birthdays/today HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'D:\\as\\backend\\app.py', reloading
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:werkzeug: * Restarting with stat
+INFO:apscheduler.scheduler:Scheduler started
+INFO:scheduler_service:Birthday Scheduler initialized
+INFO:apscheduler.scheduler:Added job "Daily Birthday Check" to job store "default"
+INFO:scheduler_service:Daily birthday check scheduled for 21:50
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 624-315-192
+INFO:werkzeug: * Detected change in 'D:\\as\\backend\\app.py', reloading
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:werkzeug: * Restarting with stat
+INFO:apscheduler.scheduler:Scheduler started
+INFO:scheduler_service:Birthday Scheduler initialized
+INFO:apscheduler.scheduler:Added job "Daily Birthday Check" to job store "default"
+INFO:scheduler_service:Daily birthday check scheduled for 21:50
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 624-315-192
+INFO:werkzeug: * Detected change in 'D:\\as\\backend\\app.py', reloading
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:werkzeug: * Restarting with stat
+INFO:apscheduler.scheduler:Scheduler started
+INFO:scheduler_service:Birthday Scheduler initialized
+INFO:apscheduler.scheduler:Added job "Daily Birthday Check" to job store "default"
+INFO:scheduler_service:Daily birthday check scheduled for 21:50
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 624-315-192
+INFO:werkzeug: * Detected change in 'D:\\as\\backend\\app.py', reloading
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:werkzeug: * Restarting with stat
+INFO:apscheduler.scheduler:Scheduler started
+INFO:scheduler_service:Birthday Scheduler initialized
+INFO:apscheduler.scheduler:Added job "Daily Birthday Check" to job store "default"
+INFO:scheduler_service:Daily birthday check scheduled for 21:50
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 624-315-192
+^C
